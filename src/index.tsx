@@ -1,4 +1,5 @@
-import { NativeModules, Platform } from 'react-native';
+import { NativeModules, Platform, NativeEventEmitter } from 'react-native';
+import type { onMetrixUpdateCallback } from './NativeMetrix';
 
 const LINKING_ERROR =
   `The package 'react-native-metrix' doesn't seem to be linked. Make sure: \n\n` +
@@ -24,6 +25,15 @@ const Metrix = MetrixModule
       }
     );
 
-export function multiply(a: number, b: number): Promise<number> {
-  return Metrix.multiply(a, b);
+export function start() {
+  Metrix.start();
+}
+
+export function stop() {
+  Metrix.stop();
+}
+
+export function onUpdate(callback: onMetrixUpdateCallback) {
+  const eventEmitter = new NativeEventEmitter(Metrix);
+  eventEmitter.addListener('metrixUpdate', callback);
 }

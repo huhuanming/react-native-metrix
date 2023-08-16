@@ -1,18 +1,29 @@
 import * as React from 'react';
 
 import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-metrix';
+import { start, onUpdate } from 'react-native-metrix';
+import type { metrixUpdateInfo } from 'src/NativeMetrix';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  const [result, setResult] = React.useState<metrixUpdateInfo>();
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    start();
+    onUpdate((info) => {
+      setResult(info);
+    });
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text>jsFps: {result?.jsFps}</Text>
+      <Text>uiFps: {result?.uiFps}</Text>
+      <Text>usedCpu: {result?.usedCpu.toFixed(2)}%</Text>
+      <Text>
+        usedRam: {`${((result?.usedRam || 0) / 1024 / 1024).toFixed(2)} Mb`}
+      </Text>
+      <Text>viewCount: {result?.viewCount}</Text>
+      <Text>visibleViewCount: {result?.visibleViewCount}</Text>
     </View>
   );
 }

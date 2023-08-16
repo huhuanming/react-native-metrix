@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E555C0D2413F4C50049A1A2 /* Metrix.mm in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* Metrix.mm */; };
+		EA1B2D9C2A8D0DD70094FF9B /* FPS.mm in Sources */ = {isa = PBXBuildFile; fileRef = EA1B2D9B2A8D0DD70094FF9B /* FPS.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +26,8 @@
 		134814201AA4EA6300B7C361 /* libMetrix.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMetrix.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5881CC2AC0600A0062D /* Metrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Metrix.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* Metrix.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Metrix.mm; sourceTree = "<group>"; };
+		EA1B2D9A2A8D0DD70094FF9B /* FPS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FPS.h; sourceTree = "<group>"; };
+		EA1B2D9B2A8D0DD70094FF9B /* FPS.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = FPS.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +52,8 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				EA1B2D9A2A8D0DD70094FF9B /* FPS.h */,
+				EA1B2D9B2A8D0DD70094FF9B /* FPS.mm */,
 				B3E7B5881CC2AC0600A0062D /* Metrix.h */,
 				B3E7B5891CC2AC0600A0062D /* Metrix.mm */,
 				134814211AA4EA7D00B7C361 /* Products */,
@@ -113,7 +117,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B3E7B58A1CC2AC0600A0062D /* Metrix.mm in Sources */,
+				EA1B2D9C2A8D0DD70094FF9B /* FPS.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
