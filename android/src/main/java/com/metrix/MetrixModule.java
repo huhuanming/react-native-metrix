@@ -8,9 +8,11 @@ import com.facebook.react.bridge.ReactMethod;
 
 public class MetrixModule extends MetrixSpec {
   public static final String NAME = "Metrix";
+  private final PerformanceStatsImpl performanceStats;
 
   MetrixModule(ReactApplicationContext context) {
     super(context);
+    performanceStats = new PerformanceStatsImpl(context);
   }
 
   @Override
@@ -20,10 +22,15 @@ public class MetrixModule extends MetrixSpec {
   }
 
 
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
+  @Override
   @ReactMethod
-  public void multiply(double a, double b, Promise promise) {
-    promise.resolve(a * b);
+  public void start() {
+   performanceStats.start();
+  }
+
+  @Override
+  @ReactMethod
+  public void stop() {
+   performanceStats.start();
   }
 }

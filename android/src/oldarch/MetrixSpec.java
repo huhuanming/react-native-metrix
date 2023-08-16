@@ -9,5 +9,6 @@ abstract class MetrixSpec extends ReactContextBaseJavaModule {
     super(context);
   }
 
-  public abstract void multiply(double a, double b, Promise promise);
+  public abstract void start();
+  public abstract void stop();
 }
