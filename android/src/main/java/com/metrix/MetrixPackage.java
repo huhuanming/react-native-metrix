@@ -1,5 +1,7 @@
 package com.metrix;
 
+import android.os.SystemClock;
+
 import androidx.annotation.Nullable;
 
 import com.facebook.react.bridge.NativeModule;
@@ -8,16 +10,19 @@ import com.facebook.react.module.model.ReactModuleInfo;
 import com.facebook.react.module.model.ReactModuleInfoProvider;
 import com.facebook.react.TurboReactPackage;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MetrixPackage extends TurboReactPackage {
+  private final long STARTUP_TIME = SystemClock.uptimeMillis();
 
   @Nullable
   @Override
   public NativeModule getModule(String name, ReactApplicationContext reactContext) {
     if (name.equals(MetrixModule.NAME)) {
-      return new MetrixModule(reactContext);
+      return new MetrixModule(reactContext, STARTUP_TIME);
     } else {
       return null;
     }

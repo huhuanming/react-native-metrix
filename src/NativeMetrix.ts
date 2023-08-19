@@ -16,6 +16,7 @@ export interface Spec extends TurboModule {
   start(): void;
   stop(): void;
   onUpdate: (callback: onMetrixUpdateCallback) => void;
+  getTimeSinceStartup(): number;
 }
 
 export default TurboModuleRegistry.getEnforcing<Spec>('Metrix');

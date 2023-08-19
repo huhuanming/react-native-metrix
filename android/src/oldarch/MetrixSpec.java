@@ -11,4 +11,5 @@ abstract class MetrixSpec extends ReactContextBaseJavaModule {
 
   public abstract void start();
   public abstract void stop();
+  public abstract Double getTimeSinceStartup();
 }

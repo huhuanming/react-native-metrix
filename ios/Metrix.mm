@@ -1,6 +1,8 @@
 #import "Metrix.h"
 
+#import <sys/sysctl.h>
 #import <mach/mach.h>
+#import <QuartzCore/QuartzCore.h>
 #import <React/RCTBridge+Private.h>
 #import <React/RCTBridge.h>
 #import <React/RCTUIManager.h>
@@ -94,6 +96,28 @@ float cpu_usage()
 
 RCT_EXPORT_MODULE()
 
+static CFTimeInterval processStartTime() {
+    size_t len = 4;
+    int mib[len];
+    struct kinfo_proc kp;
+    
+    sysctlnametomib("kern.proc.pid", mib, &len);
+    mib[3] = getpid();
+    len = sizeof(kp);
+    sysctl(mib, 4, &kp, &len, NULL, 0);
+    
+    struct timeval startTime = kp.kp_proc.p_un.__p_starttime;
+    
+    CFTimeInterval absoluteTimeToRelativeTime =  CACurrentMediaTime() - [NSDate date].timeIntervalSince1970;
+    return startTime.tv_sec + startTime.tv_usec / 1e6 + absoluteTimeToRelativeTime;
+}
+
+static CFTimeInterval startupTime;
+
++ (void)initialize {
+    startupTime = processStartTime();
+}
+
 + (BOOL)requiresMainQueueSetup
 {
   return YES;
@@ -183,6 +207,12 @@ RCT_EXPORT_METHOD(stop)
     
     _uiDisplayLink = nil;
     _jsDisplayLink = nil;
+}
+
+RCT_EXPORT_BLOCKING_SYNCHRONOUS_METHOD(getTimeSinceStartup)
+{
+    CFTimeInterval diff = CACurrentMediaTime() - startupTime;
+    return [NSNumber numberWithDouble:ceil(diff * 1000)];
 }
 
 // Don't compile this code when we build for the old architecture.
