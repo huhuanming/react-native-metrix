@@ -4,7 +4,9 @@ export function start() {}
 
 export function stop() {}
 
-export function onUpdate(_: onMetrixUpdateCallback) {}
+export function onUpdate(_: onMetrixUpdateCallback) {
+  return () => {};
+}
 
 export function getTimeSinceStartup(): number {
   return 0;
