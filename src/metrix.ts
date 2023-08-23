@@ -38,9 +38,6 @@ export function onUpdate(callback: onMetrixUpdateCallback) {
   const subscription = eventEmitter.addListener(
     'metrixUpdate',
     (info: metrixUpdateInfo) => {
-      if (Platform.OS === 'android') {
-        info.usedRam = (info.usedRam || 0) * 1024;
-      }
       callback(info);
     }
   );
