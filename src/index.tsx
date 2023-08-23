@@ -1,1 +1,1 @@
-export * from './metrix';
+export * from './metrix.web';
