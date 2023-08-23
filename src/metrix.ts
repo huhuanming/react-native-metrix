@@ -46,7 +46,6 @@ export function onUpdate(callback: onMetrixUpdateCallback) {
       } else {
         callback(info);
       }
-      callback(info);
     }
   );
   return () => {
