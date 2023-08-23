@@ -46,12 +46,10 @@ public class PerformanceStatsImpl {
         mStatsMonitorRunnable.stop();
     }
 
-    private void setCurrentStats(double uiFPS, double jsFPS, int framesDropped, int shutters, double usedRam, double usedCpu) {
+    private void setCurrentStats(double uiFPS, double jsFPS, double usedRam, double usedCpu) {
         WritableMap state = Arguments.createMap();
         state.putDouble("uiFps", uiFPS);
         state.putDouble("jsFps", jsFPS);
-        state.putInt("framesDropped", framesDropped);
-        state.putInt("shutters", shutters);
         state.putDouble("usedRam", usedRam);
         state.putDouble("usedCpu", usedCpu);
 
@@ -74,8 +72,6 @@ public class PerformanceStatsImpl {
     private class StatsMonitorRunnable implements Runnable {
 
         private boolean mShouldStop = false;
-        private int mTotalFramesDropped = 0;
-        private int mTotal4PlusFrameStutters = 0;
 
         @Override
         public void run() {
@@ -83,8 +79,6 @@ public class PerformanceStatsImpl {
                 return;
             }
             // Collect FPS info
-            mTotalFramesDropped += mFrameCallback.getExpectedNumFrames() - mFrameCallback.getNumFrames();
-            mTotal4PlusFrameStutters += mFrameCallback.get4PlusFrameStutters();
             double fps = mFrameCallback.getFPS();
             double jsFps = mFrameCallback.getJSFPS();
 
@@ -99,8 +93,6 @@ public class PerformanceStatsImpl {
             setCurrentStats(
                     fps,
                     jsFps,
-                    mTotalFramesDropped,
-                    mTotal4PlusFrameStutters,
                     usedRam,
                     cpuUsage
             );

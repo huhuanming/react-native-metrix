@@ -135,17 +135,6 @@ static CFTimeInterval startupTime;
 
 - (void)updateStats
 {
-    // View count
-    NSDictionary<NSNumber *, UIView *> *views = [self.bridge.uiManager valueForKey:@"viewRegistry"];
-    NSUInteger viewCount = views.count;
-    NSUInteger visibleViewCount = 0;
-    for (UIView *view in views.allValues) {
-      if (view.window || view.superview.window) {
-        visibleViewCount++;
-      }
-    }
-    
-    // Memory
     double mem = (double)RCTGetResidentMemorySize();
     float cpu = 0;
     cpu = cpu_usage();
@@ -154,9 +143,7 @@ static CFTimeInterval startupTime;
         @"jsFps": [NSNumber numberWithUnsignedInteger:_jsFPSTracker.FPS],
         @"uiFps": [NSNumber numberWithUnsignedInteger:_uiFPSTracker.FPS],
         @"usedCpu": [NSNumber numberWithFloat:cpu],
-        @"usedRam": [NSNumber numberWithDouble:mem],
-        @"viewCount": [NSNumber numberWithUnsignedInteger:viewCount],
-        @"visibleViewCount": [NSNumber numberWithUnsignedInteger:visibleViewCount]
+        @"usedRam": [NSNumber numberWithDouble:mem]
     }];
     
     __weak __typeof__(self) weakSelf = self;

@@ -26,8 +26,6 @@ export default function App() {
       <Text>
         usedRam: {`${((result?.usedRam || 0) / 1024 / 1024).toFixed(2)} Mb`}
       </Text>
-      <Text>viewCount: {result?.viewCount}</Text>
-      <Text>visibleViewCount: {result?.visibleViewCount}</Text>
     </View>
   );
 }
